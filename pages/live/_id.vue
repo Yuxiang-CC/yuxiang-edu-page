@@ -179,8 +179,14 @@ export default {
       console.log("open:  ", dataContent)
       // 发送那个websocket
       this.send(JSON.stringify(dataContent));
-      this.sendPrompt = "发送消息";
-      this.isConnection = true;
+
+      this.sendPrompt = '进入直播间3秒后即可发言！'
+      
+      setTimeout(() => {
+        this.sendPrompt = "发送消息";
+        this.isConnection = true;
+      }, 1000 * 3);
+      
       // 定时发送心跳包
       setInterval(() => {
         this.keepalive();

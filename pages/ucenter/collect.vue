@@ -54,8 +54,8 @@
 
             <el-table-column label="操作" width="150" align="center">
               <template slot-scope="scope">
-                <!-- <a  title="取消收藏" @click="removeCollect(scope.row.id)"></a> -->
-                <el-link href="javascript:void(0);" icon="el-icon-circle-close" type="danger" @click="removeCollect(scope.row.id)">取消收藏</el-link>
+                <!-- <a  title="取消收藏" @click="removeCollect(scope.row.id)">取消收藏</a> -->
+                <el-link icon="el-icon-circle-close" type="danger" @click="removeCollect(scope.row.id)">取消收藏</el-link>
               </template>
             </el-table-column>
           </el-table>
@@ -85,6 +85,7 @@ export default {
     },
     // 取消收藏
     removeCollect(courseId) {
+      console.log(courseId)
       this.$confirm('确认要取消收藏吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -97,10 +98,11 @@ export default {
           message: res.data.message,
           type: 'success'
         })
+        this.fetchCourseCollectList()
       }).catch(err => {
         this.$notify({
           title: '通知',
-          message: err.data.message,
+          message: '取消' || err.data.message,
           type: 'error'
         })
       })
